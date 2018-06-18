@@ -3,26 +3,29 @@ spring:
     host: 172.0.0.1
     #assword: 123456
     port: 6379
-  jpa:
-    database-platform: org.hibernate.dialect.MySQLDialect
-    show-sql: true
-    hibernate:
-      ddl-auto: update
-  datasource:
-    druid:
-      url: jdbc:mysql://localhost:3306/usersinfo
-      username: root
-      password: root
-  application:
-    name: springcloud-provider-config
-  profiles:
-    active: production
-logging:
-  level:
-    root: info
-    org.hibernate : info
-    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
-    org.hibernate.type.descriptor.sql.BasicExtractor: TRACE
-    com.yasaka.stock : debug
+    
 server:
   port: 8763
+spring:
+    datasource:
+        name: usersinfo
+        url: jdbc:mysql://localhost:3306/usersinfo?useUnicode=true&characterEncoding=UTF-8&useSSL=false
+        username: root
+        password: root
+        driver-class-name: com.mysql.jdbc.Driver
+        filters: stat
+        maxActive: 20
+        initialSize: 1
+        maxWait: 60000
+        minIdle: 1
+        timeBetweenEvictionRunsMillis: 60000
+        minEvictableIdleTimeMillis: 300000
+        validationQuery: select 'x'
+        testWhileIdle: true
+        testOnBorrow: false
+        testOnReturn: false
+        poolPreparedStatements: true
+        maxOpenPreparedStatements: 20
+mybatis:
+  mapper-locations: classpath:mapping/*.xml
+  type-aliases-package: com.example.eurekaclient.model
